@@ -105,9 +105,9 @@ start with INICIO;
 INICIO::=  E:a {: 
              String temp = String.valueOf(a);
              System.out.println("Operacion: "+temp); 
+             resultado = temp;
              RESULT = a;
-            :}
-    ;
+            :};
 
 E::= E:a mas E:b{:
     RESULT= a+b;

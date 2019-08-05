@@ -220,6 +220,7 @@ int exponente(int exp){
 		 
              String temp = String.valueOf(a);
              System.out.println("Operacion: "+temp); 
+             resultado = temp;
              RESULT = a;
             
               CUP$analisis_sintactico$result = parser.getSymbolFactory().newSymbol("INICIO",0, ((java_cup.runtime.Symbol)CUP$analisis_sintactico$stack.peek()), ((java_cup.runtime.Symbol)CUP$analisis_sintactico$stack.peek()), RESULT);
