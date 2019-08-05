@@ -1,19 +1,19 @@
-# UNIVERSIDAD DE SAN CARLOS DE GUATEMALA
-## FACULTAD DE INGENIERIA
-### ORGANIZACIÓN DE LENGUAJES Y COMPILADORES 1
+# **UNIVERSIDAD DE SAN CARLOS DE GUATEMALA**
+## *FACULTAD DE INGENIERÍA*
+## **ORGANIZACIÓN DE LENGUAJES Y COMPILADORES 1**
 
-#### CLASE 1
+#### **CLASE 1**
 
-## COMPILAR FLEX Y CUP A TRAVÉS DE ARCHIVOS BAT
+### _COMPILAR FLEX Y CUP A TRAVÉS DE ARCHIVOS BAT_
 - Dirigirse a la carpeta src/Generadores
 - Hacer doble click sobre los archivos Lexico.bat y Sintactico.bat
 
-## COMPILAR FLEX Y CUP A TRAVÉS DE ARCHIVOS .java, DESDE NETBEANS
+### _COMPILAR FLEX Y CUP A TRAVÉS DE ARCHIVOS .java, DESDE NETBEANS_
 - Desde Netbeans, dirigirse a la carpeta Generadores
 - Hacer click derecho sobre los archivos GLexico.java o GSintactico.java
 - Seleccionar Run File
 
-## COMPILAR FLEX Y CUP A TRAVÉS DE CONSOLA
+### _COMPILAR FLEX Y CUP A TRAVÉS DE CONSOLA_
 - Descomprimir en C:\Clase1
 - Abrir esta ruta en consola C:\Clase1\src\Analizadores
 - Ejecutar los siguientes comandos 
