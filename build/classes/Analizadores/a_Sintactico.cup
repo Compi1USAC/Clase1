@@ -7,8 +7,8 @@
 
 package Analizadores;
 
+import java.util.*; 
 import java_cup.runtime.Symbol;
-import java.util.ArrayList;
 
 
 //-------> Codigo para el parser, variables, metodos
@@ -84,13 +84,15 @@ int exponente(int exp){
 ----------------------------------------------------------------------------*/
 
 //-------> TERMINALES
-terminal apar, cpar, coma;
+terminal apar, cpar, coma, puntoComa;
 terminal mas, menos, por, dividir;
-terminal String id, numero,cadena, claves, registros;
+terminal String id, numero, cadena, claves, registros;
 
 //-------> NO TERMINALES
-non terminal Double INICIO;
 non terminal Double E;
+non terminal String INICIO;
+non terminal LinkedList<String> LISTAID, LISTADECLARACION;
+non terminal String DECLARACION;
 
 //-------> PRECEDENCIA
 precedence left mas, menos;
@@ -102,31 +104,72 @@ start with INICIO;
 /*-------------------------------------------------------------------
 --------------------- 3ra. y ultima area: Reglas Sintacticas
 -------------------------------------------------------------------*/
-INICIO::=  E:a {: 
-             String temp = String.valueOf(a);
-             System.out.println("Operacion: "+temp); 
-             RESULT = a;
-            :}
-    ;
+INICIO::=  LISTADECLARACION:ls{:
+            String temp = "";
+            for(int i = 0; i < ls.size(); i++){
+                temp = temp + String.valueOf(ls.get(i)) + "\n";
+            }
+            System.out.println("SALIDA: "+temp); 
+            resultado = temp;
+        :}
+        ;
 
-E::= E:a mas E:b{:
-    RESULT= a+b;
-:}
-|E:a menos E:b{:
-    RESULT= a-b;
-:}
-|E:a por E:b{:
-    RESULT= a*b;
-:}
-|E:a dividir E:b{:
-    RESULT= a/b;
-:}
-|numero:a {:
-    RESULT=Double.parseDouble((String)a);
-:}
-|menos E:a{:
-    RESULT = -a;
-:}
-|apar E:a cpar{:
-    RESULT=a;
-:};
+LISTADECLARACION ::= LISTADECLARACION:a DECLARACION:b{:
+                    a.add(b);
+                    RESULT = a;
+                :}
+                | DECLARACION:b{:
+                    RESULT = new LinkedList<String>(); 
+                    RESULT.add(b);
+                :}
+                | error puntoComa{:
+                    System.out.println("Implementar una recuperacion");
+                :}
+                ;
+
+DECLARACION ::= E:a puntoComa{: 
+                // Lo casteo porque el tipo de E es Double
+                RESULT = String.valueOf(a);
+            :}
+            | LISTAID:lista puntoComa{: 
+                String temp = "";
+                for(int i = 0; i < lista.size(); i++){
+                    temp += String.valueOf(lista.get(i)) + "\n";
+                }
+                RESULT = temp;
+            :}
+            ;
+
+LISTAID ::= LISTAID:l coma id:a{:
+            l.add(a);
+            RESULT = l;
+        :}
+        | id:a{:
+            LinkedList<String> lista = new LinkedList<String>(); 
+            lista.add(a);
+            RESULT = lista;
+         :}
+        ;
+
+E ::= E:a mas E:b{:
+        RESULT= a+b;
+    :}
+    | E:a menos E:b{:
+        RESULT= a-b;
+    :}
+    | E:a por E:b{:
+        RESULT= a*b;
+    :}
+    | E:a dividir E:b{:
+        RESULT= a/b;
+    :}
+    | menos E:a{:
+        RESULT = -a;
+    :}
+    | apar E:a cpar{:
+        RESULT=a;
+    :}
+    | numero:a {:
+        RESULT=Double.parseDouble((String)a);
+    :}
+    ;

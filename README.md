@@ -1,6 +1,5 @@
 # **UNIVERSIDAD DE SAN CARLOS DE GUATEMALA**
-## *FACULTAD DE INGENIERÍA*
-## **ORGANIZACIÓN DE LENGUAJES Y COMPILADORES 1**
+## *ORGANIZACIÓN DE LENGUAJES Y COMPILADORES 1*
 
 #### **CLASE 1**
 
@@ -25,3 +24,24 @@
 		```
 		java -jar "C:\Clase1\lib\java-cup-11b.jar" -parser a_sintactico -symbols Simbolos a_sintactico.cup
 		```
+
+### _ENTRADAS ADMITIDAS_
+#### **Operaciones aritméticas**
+- Ejemplo:
+		```
+		4+3*5/10;
+		```
+
+#### **Lista de Ids**
+- Ejemplo:
+		```
+		id1, id2, id_3;
+		```
+
+#### **Listas y Operaciones juntas**
+- Ejemplo:
+		```
+		id1, id2 ;
+		3 + 3;
+		```
+

@@ -90,6 +90,9 @@ id = {letra}+({letra}|{digito}|"_")*
 <YYINITIAL> ","         {   System.out.println("Reconocido: <<"+yytext()+">>, coma");
                             return new Symbol(Simbolos.coma, yycolumn, yyline, yytext());}
 
+<YYINITIAL> ";"         {   System.out.println("Reconocido: <<"+yytext()+">>, puntoComa");
+                            return new Symbol(Simbolos.puntoComa, yycolumn, yyline, yytext());}
+
 
 //-------> Reservadas, tipos de datos y del sistema
 
