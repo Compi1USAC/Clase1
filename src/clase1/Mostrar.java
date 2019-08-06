@@ -7,6 +7,8 @@ package clase1;
 
 import Analizadores.a_Lexico;
 import Analizadores.analisis_sintactico;
+import AnalizadoresArchivoDatos.a_Lexico_2;
+import AnalizadoresArchivoDatos.analisis_sintactico_2;
 import java.io.BufferedReader;
 import java.io.StringReader;
 
@@ -87,8 +89,8 @@ public class Mostrar extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         String datos = entrada.getText();
-        a_Lexico lexico = new a_Lexico(new BufferedReader(new StringReader(datos)));
-        analisis_sintactico sintactico = new analisis_sintactico(lexico);
+        a_Lexico_2 lexico = new a_Lexico_2(new BufferedReader(new StringReader(datos)));
+        analisis_sintactico_2 sintactico = new analisis_sintactico_2(lexico);
         try{
             sintactico.parse();
             salida.setText(sintactico.resultado);

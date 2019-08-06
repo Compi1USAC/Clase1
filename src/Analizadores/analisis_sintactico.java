@@ -143,7 +143,7 @@ public class analisis_sintactico extends java_cup.runtime.lr_parser {
         System.out.println("\t\tLexema: "+lexema);
         System.out.println("\t\tFila: "+fila);
         System.out.println("\t\tColumna: "+columna);
-       
+
         //lista_errores.add(new ErrorT(lexema, fila, columna,"sintactico" ,"Simbolo no esperado"));
         /*AcepErr datos =new AcepErr(lexema, "ERROR SINTACTICO" ,fila,columna,"Simbolo no esperado");
             TablaErr.add(datos);
@@ -335,6 +335,7 @@ int exponente(int exp){
 		String a = (String)((java_cup.runtime.Symbol) CUP$analisis_sintactico$stack.peek()).value;
 		
             l.add(a);
+            System.out.println("agregando elemento a partir del primero");
             RESULT = l;
         
               CUP$analisis_sintactico$result = parser.getSymbolFactory().newSymbol("LISTAID",2, ((java_cup.runtime.Symbol)CUP$analisis_sintactico$stack.elementAt(CUP$analisis_sintactico$top-2)), ((java_cup.runtime.Symbol)CUP$analisis_sintactico$stack.peek()), RESULT);
@@ -350,6 +351,7 @@ int exponente(int exp){
 		String a = (String)((java_cup.runtime.Symbol) CUP$analisis_sintactico$stack.peek()).value;
 		
             LinkedList<String> lista = new LinkedList<String>(); 
+            System.out.println("primerelemento");
             lista.add(a);
             RESULT = lista;
          

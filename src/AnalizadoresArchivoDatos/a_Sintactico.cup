@@ -5,7 +5,7 @@
 //-------> Importaciones 
 //-------> Paquetes 
 
-package Analizadores;
+package AnalizadoresArchivoDatos;
 
 import java.util.*; 
 import java_cup.runtime.Symbol;
@@ -85,18 +85,14 @@ int exponente(int exp){
 
 //-------> TERMINALES
 terminal apar, cpar, coma, puntoComa;
-terminal mas, menos, por, dividir;
+terminal allave, cllave, acorch, ccorch, igual;
 terminal String id, numero, cadena, claves, registros;
 
 //-------> NO TERMINALES
 non terminal Double E;
 non terminal String INICIO;
 non terminal LinkedList<String> LISTAID, LISTADECLARACION;
-non terminal String DECLARACION;
-
-//-------> PRECEDENCIA
-precedence left mas, menos;
-precedence left por, dividir;
+non terminal String DECLARACION, CLAVEREGISTRO, LISTACLAVES, CLAVE, LISTAREGISTROS, LISTAVAL;
 
 start with INICIO;
 
@@ -104,116 +100,42 @@ start with INICIO;
 /*-------------------------------------------------------------------
 --------------------- 3ra. y ultima area: Reglas Sintacticas
 -------------------------------------------------------------------*/
-INICIO::=  LISTADECLARACION:ls{:
-            String temp = "";
-            for(int i = 0; i < ls.size(); i++){
-                temp = temp + String.valueOf(ls.get(i)) + "\n";
-            }
-            System.out.println("SALIDA: "+temp); 
-            resultado = temp;
+INICIO::=  CLAVEREGISTRO:ls{:
+            
         :}
         ;
-
-LISTADECLARACION ::= LISTADECLARACION:a DECLARACION:b{:
-                    a.add(b);
-                    RESULT = a;
-                :}
-                | DECLARACION:b{:
-                    RESULT = new LinkedList<String>(); 
-                    RESULT.add(b);
-                :}
-                | error puntoComa{:
-                    System.out.println("Implementar una recuperacion");
-                :}
+CLAVEREGISTRO::= claves igual acorch LISTACLAVES ccorch registros igual acorch LISTAREGISTROS ccorch
                 ;
 
-DECLARACION ::= E:a puntoComa{: 
-                // Lo casteo porque el tipo de E es Double
-                RESULT = String.valueOf(a);
-            :}
-            | LISTAID:lista puntoComa{: 
-                String temp = "";
-                for(int i = 0; i < lista.size(); i++){
-                    temp += String.valueOf(lista.get(i)) + "\n";
-                }
-                RESULT = temp;
-            :}
+LISTACLAVES ::= LISTACLAVES coma CLAVE
+            | CLAVE
             ;
 
-LISTAID ::= LISTAID:l coma id:a{:
-            l.add(a);
-            System.out.println("agregando elemento a partir del primero");
-            RESULT = l;
-        :}
-        | id:a{:
-            LinkedList<String> lista = new LinkedList<String>(); 
-            System.out.println("primerelemento");
-            lista.add(a);
-            RESULT = lista;
-         :}
-        ;
-
-E ::= E:a mas E:b{:
-        RESULT= a+b;
-    :}
-    | E:a menos E:b{:
-        RESULT= a-b;
-    :}
-    | E:a por E:b{:
-        RESULT= a*b;
-    :}
-    | E:a dividir E:b{:
-        RESULT= a/b;
-    :}
-    | menos E:a{:
-        RESULT = -a;
-    :}
-    | apar E:a cpar{:
-        RESULT=a;
-    :}
-    | numero:a {:
-        RESULT=Double.parseDouble((String)a);
-    :}
-    ;
-
-/**** 
-
-INICIO ::= E
-
-E ::= E tMas E {: print(holamundo) :}
-    | E tPor E
-    | tNumero
-    ;
-
-         INICIO
-           |
-           E:double, 11
-      /    |      \
-    /      |        \
-    E:doub tMas      E:double
-    |      |        |
- tNumero  tMas     tNumero
-    |      |        |
-    5      +        6      
-
-************
-
-LISTA ::= LISTA tComa tId
-       | tId 
+CLAVE ::= cadena
+       | numero
        ;
 
-                           LISTA
-               /             |      \
-            /               
-          LISTA            tComa    tId
-            |                |
-    /       |      \ 
-  LISTA   tComa    tId       |
-    |               |        |
-   tId              |        |
-    |       |       |        |
-  id_1      ,     id_2       ,    id_3
+LISTAREGISTROS ::= LISTAREGISTROS allave LISTAVAL cllave
+                | allave LISTAVAL cllave
+                ;
 
-****/
+LISTAVAL ::= LISTAVAL coma CLAVE
+          | CLAVE
+          ;
 
 
+/*************************************
+
+//ENTRADA
+//Ejemplos de la definición de los registros de un archivo 
+
+claves = [
+    1024 // Registro 1
+]
+Registros = [
+    {1, "Nery", "Galvez"} // Registro 1
+    {2, "Miguel", "Ruano"} // Registro 2
+    {3, "Erick", "Tejaxún"} // Registro 3
+]
+
+************************************/

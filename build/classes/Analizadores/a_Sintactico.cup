@@ -29,7 +29,7 @@ parser code
         System.out.println("\t\tLexema: "+lexema);
         System.out.println("\t\tFila: "+fila);
         System.out.println("\t\tColumna: "+columna);
-       
+
         //lista_errores.add(new ErrorT(lexema, fila, columna,"sintactico" ,"Simbolo no esperado"));
         /*AcepErr datos =new AcepErr(lexema, "ERROR SINTACTICO" ,fila,columna,"Simbolo no esperado");
             TablaErr.add(datos);
@@ -142,10 +142,12 @@ DECLARACION ::= E:a puntoComa{:
 
 LISTAID ::= LISTAID:l coma id:a{:
             l.add(a);
+            System.out.println("agregando elemento a partir del primero");
             RESULT = l;
         :}
         | id:a{:
             LinkedList<String> lista = new LinkedList<String>(); 
+            System.out.println("primerelemento");
             lista.add(a);
             RESULT = lista;
          :}
@@ -173,3 +175,45 @@ E ::= E:a mas E:b{:
         RESULT=Double.parseDouble((String)a);
     :}
     ;
+
+/**** 
+
+INICIO ::= E
+
+E ::= E tMas E {: print(holamundo) :}
+    | E tPor E
+    | tNumero
+    ;
+
+         INICIO
+           |
+           E:double, 11
+      /    |      \
+    /      |        \
+    E:doub tMas      E:double
+    |      |        |
+ tNumero  tMas     tNumero
+    |      |        |
+    5      +        6      
+
+************
+
+LISTA ::= LISTA tComa tId
+       | tId 
+       ;
+
+                           LISTA
+               /             |      \
+            /               
+          LISTA            tComa    tId
+            |                |
+    /       |      \ 
+  LISTA   tComa    tId       |
+    |               |        |
+   tId              |        |
+    |       |       |        |
+  id_1      ,     id_2       ,    id_3
+
+****/
+
+
